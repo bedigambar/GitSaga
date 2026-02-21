@@ -14,6 +14,16 @@ GitSaga transforms any repository's commit log into a dramatic, chapter-based na
 - **Export** — Copy to clipboard or download the story as Markdown
 - **GitHub OAuth** — Secure authentication with access to both public and private repos
 
+## Demo Video
+
+Check out the application in action:
+
+
+https://github.com/user-attachments/assets/7677ae2c-c29c-4a28-8e38-89721af9ea42
+
+
+
+
 ## Tech Stack
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router, Turbopack)
