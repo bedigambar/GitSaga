@@ -1,25 +1,32 @@
-"use client";
-
-import { useSession, signIn } from "@/lib/auth-client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Github, BookOpen, Zap, GitCommit, Sparkles, Wand2, ShieldCheck } from "lucide-react";
+import HeroCTA from "@/components/HeroCTA";
+import { BookOpen, GitCommit, Sparkles, Wand2 } from "lucide-react";
 import { InteractiveBackground } from "@/components/InteractiveBackground";
 
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "GitSaga",
+    url: "https://git-saga.vercel.app",
+    description:
+        "Turn your GitHub commit history into an epic AI-narrated story. Every commit is a chapter. Every repo is a saga.",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+    },
+};
+
 export default function LandingPage() {
-    const { data: session, isPending } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (session && !isPending) {
-            router.push("/dashboard");
-        }
-    }, [session, isPending, router]);
-
     return (
         <InteractiveBackground>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="min-h-screen flex flex-col">
                 <Navbar />
 
@@ -48,24 +55,8 @@ export default function LandingPage() {
                         Witness your development journey retold as a legend for the ages.
                     </p>
 
-                    {/* CTA Group */}
-                    <div className="flex flex-col items-center gap-6">
-                        <button
-                            onClick={() =>
-                                signIn.social({ provider: "github", callbackURL: "/dashboard" })
-                            }
-                            className="group relative flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground text-xl font-bold hover:bg-primary/90 transition-all duration-300 shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1"
-                        >
-                            <Github className="w-6 h-6" />
-                            Connect with GitHub
-                            <div className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                        <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground/40">
-                            <span className="flex items-center gap-1.5"><ShieldCheck className="w-3 h-3" /> Secure Access</span>
-                            <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
-                            <span className="flex items-center gap-1.5"><Zap className="w-3 h-3" /> Instant Generation</span>
-                        </div>
-                    </div>
+                    {/* CTA Group (client component for auth) */}
+                    <HeroCTA />
 
                     {/* Bento Grid Features */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-32 max-w-6xl w-full px-4">
