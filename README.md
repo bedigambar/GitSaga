@@ -125,5 +125,34 @@ src/
     └── utils.ts                # cn(), formatDistanceToNow()
 ```
 
+## AI Provider Note
+
+GitSaga uses **Groq** (LLaMA 3.3 70B) by default for story generation. Since Groq's free tier has rate limits and the model can occasionally produce quirky or inconsistent responses, you may want to swap in a different provider.
+
+Thanks to the [Vercel AI SDK](https://sdk.vercel.ai/), switching is straightforward — just change the model import in `src/app/api/generate-story/route.ts`:
+
+| Provider | Install | Model Code |
+|---|---|---|
+| **Groq** (default) | `@ai-sdk/groq` | `groq("llama-3.3-70b-versatile")` |
+| **Google Gemini** | `@ai-sdk/google` | `google("gemini-1.5-pro")` |
+| **OpenAI** | `@ai-sdk/openai` | `openai("gpt-4o")` |
+| **Anthropic** | `@ai-sdk/anthropic` | `anthropic("claude-sonnet-4-20250514")` |
+
+For example, to switch to Google Gemini:
+
+```bash
+npm install @ai-sdk/google
+```
+
+```ts
+// src/app/api/generate-story/route.ts
+import { google } from "@ai-sdk/google";
+
+// Then in the streamText call:
+model: google("gemini-1.5-pro"),
+```
+
+Don't forget to add the corresponding API key to your `.env` (e.g. `GOOGLE_GENERATIVE_AI_API_KEY`).
+
 ## License
 This project is open source and available under the [MIT License](https://github.com/bedigambar/GitSaga/blob/main/LICENSE).
