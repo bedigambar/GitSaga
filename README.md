@@ -88,12 +88,22 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Root layout (fonts, Toaster)
+│   ├── layout.tsx              # Root layout (fonts, metadata, Toaster)
 │   ├── globals.css             # Theme, animations, custom utilities
+│   ├── robots.ts               # Search engine crawl rules
+│   ├── sitemap.ts              # Dynamic sitemap generation
+│   ├── manifest.ts             # Web app manifest (PWA)
+│   ├── opengraph-image.tsx     # Dynamic OG image for social sharing
+│   ├── not-found.tsx           # Custom 404 page
 │   ├── (app)/
-│   │   ├── page.tsx            # Landing page
-│   │   ├── dashboard/page.tsx  # Repo selector
-│   │   └── story/[owner]/[repo]/page.tsx  # Story generation page
+│   │   ├── layout.tsx          # App shell layout
+│   │   ├── page.tsx            # Landing page (SSR)
+│   │   ├── dashboard/
+│   │   │   ├── layout.tsx      # Dashboard metadata
+│   │   │   └── page.tsx        # Repo selector
+│   │   └── story/
+│   │       ├── layout.tsx      # Story metadata
+│   │       └── [owner]/[repo]/page.tsx  # Story generation page
 │   └── api/
 │       ├── auth/               # GitHub OAuth flow
 │       ├── generate-story/     # AI story streaming endpoint
@@ -102,6 +112,7 @@ src/
 ├── components/
 │   ├── Navbar.tsx
 │   ├── Footer.tsx
+│   ├── HeroCTA.tsx             # Auth-aware CTA button (client component)
 │   ├── RepoCard.tsx
 │   ├── StoryViewer.tsx         # Story renderer with TTS, export, code links
 │   ├── RpgCharacterCard.tsx    # RPG stats card for repos
