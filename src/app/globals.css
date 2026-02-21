@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite alternate;
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes glow {
+    from { box-shadow: 0 0 10px -5px var(--primary), 0 0 5px -5px var(--accent); }
+    to { box-shadow: 0 0 20px -5px var(--primary), 0 0 10px -5px var(--accent); }
+  }
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Dark Orange / Ember Theme */
+  --background: oklch(0.11 0.01 45); /* Deep charcoal/warm black */
+  --foreground: oklch(0.98 0.01 45); /* Warm white */
+  
+  --card: oklch(0.15 0.02 45);
+  --card-foreground: oklch(0.95 0.02 45);
+  
+  --popover: oklch(0.15 0.02 45);
+  --popover-foreground: oklch(0.95 0.02 45);
+  
+  --primary: oklch(0.70 0.19 45); /* Vivid Orange */
+  --primary-foreground: oklch(0.12 0.02 45);
+  
+  --secondary: oklch(0.22 0.04 45);
+  --secondary-foreground: oklch(0.90 0.02 45);
+  
+  --muted: oklch(0.18 0.02 45);
+  --muted-foreground: oklch(0.65 0.04 45);
+  
+  --accent: oklch(0.25 0.06 45); 
+  --accent-foreground: oklch(0.95 0.05 45);
+  
+  --destructive: oklch(0.55 0.20 25);
+  --destructive-foreground: oklch(0.98 0.00 0);
+
+  --border: oklch(0.25 0.03 45);
+  --input: oklch(0.25 0.03 45);
+  --ring: oklch(0.70 0.19 45);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--primary) 30%, transparent);
+  color: var(--foreground);
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .glass {
+    @apply bg-background/60 backdrop-blur-xl border border-white/10 shadow-lg;
+  }
+  
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-md border border-white/5 hover:bg-card/60 transition-all duration-300;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px var(--primary);
+  }
+  
+  .gitsaga-bg {
+    background-image: 
+        radial-gradient(circle at 15% 50%, oklch(0.2 0.1 40 / 0.15), transparent 25%), 
+        radial-gradient(circle at 85% 30%, oklch(0.2 0.1 60 / 0.15), transparent 25%);
+    background-attachment: fixed;
+  }
+
+  /* Typewriter cursor */
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: var(--primary);
+    margin-left: 2px;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Custom Keyframes for Animations */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%) }
+  to { transform: translateY(100%) }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+
