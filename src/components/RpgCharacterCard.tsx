@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import { Sword, Scroll, Zap, Crown, User, Book } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -60,7 +61,7 @@ export function RpgCharacterCard({
                         <div className="relative">
                             <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-primary shadow-[0_0_15px_rgba(var(--primary),0.5)]">
                                 {ownerAvatar ? (
-                                    <img src={ownerAvatar} alt="Avatar" className="w-full h-full object-cover" />
+                                    <Image src={ownerAvatar} alt="Avatar" width={64} height={64} className="w-full h-full object-cover" />
                                 ) : (
                                     <div className="w-full h-full bg-primary/20 flex items-center justify-center">
                                         <User className="w-8 h-8 text-primary" />
