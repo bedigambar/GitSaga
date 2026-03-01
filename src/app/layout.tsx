@@ -11,7 +11,7 @@ const SITE_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ?? 'https://git-saga.vercel.app',
+    process.env.NEXT_PUBLIC_BASE_URL ?? 'https://git-saga.vercel.app/',
   ),
   title: {
     default: 'GitSaga — Your Code, As Legend',
